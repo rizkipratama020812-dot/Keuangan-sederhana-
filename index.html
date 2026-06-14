@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Keuangan Modern</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loading-screen" class="loading-screen">
+        <div class="loader-wrapper">
+            <div class="loader"></div>
+            <i class="fas fa-wallet loader-icon"></i>
+        </div>
+        <h2>Memuat Data...</h2>
+    </div>
+
+    <div class="mobile-header glass-panel-header">
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-wallet"></i></div>
+            <span>RizFlow</span>
+        </div>
+        <button id="menu-toggle"><i class="fas fa-bars"></i></button>
+    </div>
+
+    <div class="app-container">
+        <nav class="sidebar glass-panel" id="sidebar">
+            <div class="logo desktop-logo">
+                <div class="logo-icon"><i class="fas fa-wallet"></i></div>
+                <span>FinTech App</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#dashboard" class="active"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+                <li><a href="#transaksi"><i class="fas fa-exchange-alt"></i> <span>Transaksi</span></a></li>
+                <li><a href="#analisis"><i class="fas fa-chart-pie"></i> <span>Analisis</span></a></li>
+                <li><a href="#celengan"><i class="fas fa-bullseye"></i> <span>Target Tabungan</span></a></li>
+                <li><a href="#riwayat"><i class="fas fa-history"></i> <span>Riwayat</span></a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-header glass-panel">
+                <div class="header-title">
+                    <h2 id="greeting-text">Ringkasan Keuangan</h2>
+                    <p class="subtitle">Pantau arus kas Anda dengan mudah</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-icon theme-btn" id="theme-toggle" title="Ubah Tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section id="dashboard" class="section-container active-section">
+                <div class="grid-cards">
+                    <div class="card glass-panel card-gradient-primary">
+                        <div class="card-icon-wrapper"><i class="fas fa-wallet"></i></div>
+                        <div class="card-info">
+                            <h3>Saldo Saat Ini</h3>
+                            <p id="saldo-saat-ini">Rp 0</p>
+                        </div>
+                    </div>
+                    <div class="card glass-panel card-gradient-green">
+                        <div class="card-icon-wrapper"><i class="fas fa-arrow-trend-up"></i></div>
+                        <div class="card-info">
+                            <h3>Total Pemasukan</h3>
+                            <p id="total-pemasukan">Rp 0</p>
+                        </div>
+                    </div>
+                    <div class="card glass-panel card-gradient-red">
+                        <div class="card-icon-wrapper"><i class="fas fa-arrow-trend-down"></i></div>
+                        <div class="card-info">
+                            <h3>Total Pengeluaran</h3>
+                            <p id="total-pengeluaran">Rp 0</p>
+                        </div>
+                    </div>
+                    <div class="card glass-panel card-gradient-purple">
+                        <div class="card-icon-wrapper"><i class="fas fa-heartbeat"></i></div>
+                        <div class="card-info">
+                            <h3>Status Kesehatan</h3>
+                            <p id="status-kesehatan">🟡 Cukup</p>
+                            <small id="jumlah-transaksi" class="badge-transaksi">0 Transaksi</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="transaksi" class="section-container">
+                <div class="form-grid">
+                    <div class="glass-panel form-card border-top-green">
+                        <div class="form-header">
+                            <div class="icon-circle icon-green"><i class="fas fa-plus"></i></div>
+                            <h3>Tambah Pemasukan</h3>
+                        </div>
+                        <form id="form-pemasukan">
+                            <input type="hidden" id="edit-id-pemasukan">
+                            <div class="form-group">
+                                <label><i class="fas fa-tag"></i> Nama Transaksi</label>
+                                <input type="text" id="nama-pemasukan" required placeholder="Contoh: Gaji Bulanan">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-coins"></i> Nominal (Rp)</label>
+                                <input type="number" id="nominal-pemasukan" required placeholder="0" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-folder"></i> Kategori</label>
+                                <input type="text" id="kategori-pemasukan" required placeholder="Tulis kategori..." list="kategori-in-list">
+                                <datalist id="kategori-in-list">
+                                    <option value="Gaji">
+                                    <option value="Investasi">
+                                    <option value="Bonus">
+                                    <option value="Bisnis">
+                                    <option value="Uang Sekolah">
+                                    <option value="lainnya">
+                                </datalist>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar-alt"></i> Tanggal</label>
+                                <input type="date" id="tanggal-pemasukan" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-sticky-note"></i> Catatan (Opsional)</label>
+                                <textarea id="catatan-pemasukan" rows="2" placeholder="Tambahkan catatan..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-green w-100 btn-glow"><i class="fas fa-save"></i> Simpan Pemasukan</button>
+                        </form>
+                    </div>
+
+                    <div class="glass-panel form-card border-top-red">
+                        <div class="form-header">
+                            <div class="icon-circle icon-red"><i class="fas fa-minus"></i></div>
+                            <h3>Tambah Pengeluaran</h3>
+                        </div>
+                        <form id="form-pengeluaran">
+                            <input type="hidden" id="edit-id-pengeluaran">
+                            <div class="form-group">
+                                <label><i class="fas fa-tag"></i> Nama Transaksi</label>
+                                <input type="text" id="nama-pengeluaran" required placeholder="Contoh: Belanja Bulanan">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-coins"></i> Nominal (Rp)</label>
+                                <input type="number" id="nominal-pengeluaran" required placeholder="0" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-folder"></i> Kategori</label>
+                                <input type="text" id="kategori-pengeluaran" required placeholder="Tulis kategori..." list="kategori-ex-list">
+                                <datalist id="kategori-ex-list">
+                                    <option value="Makanan">
+                                    <option value="Transportasi">
+                                    <option value="Belanja">
+                                    <option value="Tagihan">
+                                    <option value="Beli Paketan">
+                                    <option value="lainnya">
+                                </datalist>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar-alt"></i> Tanggal</label>
+                                <input type="date" id="tanggal-pengeluaran" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-sticky-note"></i> Catatan (Opsional)</label>
+                                <textarea id="catatan-pengeluaran" rows="2" placeholder="Tambahkan catatan..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-red w-100 btn-glow"><i class="fas fa-save"></i> Simpan Pengeluaran</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section id="analisis" class="section-container">
+                <div class="analysis-grid">
+                    <div class="glass-panel chart-container">
+                        <div class="chart-header">
+                            <i class="fas fa-balance-scale text-primary"></i>
+                            <h3>Pemasukan vs Pengeluaran</h3>
+                        </div>
+                        <div class="canvas-wrapper"><canvas id="chart-in-vs-out"></canvas></div>
+                    </div>
+                    <div class="glass-panel chart-container">
+                        <div class="chart-header">
+                            <i class="fas fa-chart-pie text-red"></i>
+                            <h3>Kategori Pengeluaran</h3>
+                        </div>
+                        <div class="canvas-wrapper"><canvas id="chart-kategori-pengeluaran"></canvas></div>
+                    </div>
+                    <div class="glass-panel chart-container full-width">
+                        <div class="chart-header">
+                            <i class="fas fa-chart-bar text-green"></i>
+                            <h3>Kategori Pemasukan</h3>
+                        </div>
+                        <div class="canvas-wrapper"><canvas id="chart-kategori-pemasukan"></canvas></div>
+                    </div>
+                </div>
+                <div class="analysis-details glass-panel mt-4">
+                    <div class="advice-header">
+                        <div class="icon-circle icon-cyan"><i class="fas fa-robot"></i></div>
+                        <h3>Saran Keuangan Otomatis</h3>
+                    </div>
+                    <p id="saran-keuangan" class="advice-text">Belum ada cukup data untuk memberikan saran.</p>
+                    
+                    <h3 class="mt-4 ranking-title"><i class="fas fa-trophy text-yellow"></i> Ranking Pengeluaran Terbesar</h3>
+                    <ul id="ranking-pengeluaran" class="ranking-list"></ul>
+                </div>
+            </section>
+
+            <section id="celengan" class="section-container">
+                <div class="glass-panel celengan-card">
+                    <div class="celengan-header">
+                        <div class="celengan-title">
+                            <div class="icon-circle icon-purple"><i class="fas fa-piggy-bank"></i></div>
+                            <h3>Target Tabungan</h3>
+                        </div>
+                        <button id="btn-reset-celengan" class="btn btn-red-outline btn-sm"><i class="fas fa-sync"></i> Reset</button>
+                    </div>
+                    
+                    <div id="celengan-setup" class="mt-4">
+                        <form id="form-celengan" class="setup-form">
+                            <div class="form-group">
+                                <label>Nama Target (Misal: Beli Laptop Baru)</label>
+                                <input type="text" id="celengan-nama" required placeholder="Tujuan menabung...">
+                            </div>
+                            <div class="form-group">
+                                <label>Target Uang (Rp)</label>
+                                <input type="number" id="celengan-target" required min="1" placeholder="0">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 btn-glow"><i class="fas fa-rocket"></i> Mulai Menabung</button>
+                        </form>
+                    </div>
+
+                    <div id="celengan-active" class="mt-4 hidden">
+                        <div class="target-display">
+                            <h2 id="display-celengan-nama">Nama Target</h2>
+                            <div class="target-badge"><i class="fas fa-flag-checkered"></i> Target Aktif</div>
+                        </div>
+                        
+                        <div class="progress-wrapper">
+                            <div class="progress-info">
+                                <span id="celengan-terkumpul" class="amount-collected">Rp 0</span>
+                                <span id="celengan-total-target" class="amount-target">dari Rp 0</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div id="celengan-progress" class="progress-bar progress-glow"></div>
+                            </div>
+                            <div class="progress-stats">
+                                <span id="celengan-persentase" class="badge-percent">0%</span>
+                                <span id="celengan-sisa">Sisa: Rp 0</span>
+                            </div>
+                        </div>
+                        <div class="celengan-actions mt-4">
+                            <div class="action-input-group">
+                                <span class="currency-symbol">Rp</span>
+                                <input type="number" id="nominal-celengan-aksi" placeholder="Nominal" min="1" class="flex-grow">
+                            </div>
+                            <button id="btn-tambah-celengan" class="btn btn-green"><i class="fas fa-plus-circle"></i> Isi Celengan</button>
+                            <button id="btn-kurang-celengan" class="btn btn-red-outline"><i class="fas fa-minus-circle"></i> Ambil</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="riwayat" class="section-container">
+                <div class="glass-panel">
+                    <div class="table-header">
+                        <div class="header-title">
+                            <div class="icon-circle icon-primary"><i class="fas fa-list-alt"></i></div>
+                            <h3>Riwayat Transaksi</h3>
+                        </div>
+                        <div class="table-filters">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="search-transaksi" placeholder="Cari transaksi...">
+                            </div>
+                            <div class="select-box">
+                                <i class="fas fa-filter"></i>
+                                <select id="filter-jenis">
+                                    <option value="Semua">Semua Jenis</option>
+                                    <option value="Pemasukan">Pemasukan</option>
+                                    <option value="Pengeluaran">Pengeluaran</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Nama Transaksi</th>
+                                    <th>Kategori</th>
+                                    <th>Catatan</th>
+                                    <th>Nominal</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabel-riwayat">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2026 Analisis Keuangan Modern. Dibuat dengan <i class="fas fa-heart text-red pulse"></i> oleh Rizki Hermawan.</p>
+            </footer>
+        </main>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
